@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">WildfireMapper</string>
-    <string name="mapbox_key">pk.eyJ1IjoicXViaXpyb2JvciIsImEiOiJjamhoZml0dTMwMG1wM2RtZW1xMzUyenkyIn0.6VdfSVYnsfQIOvZ3C3uB4Q</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoicXViaXpyb2JvciIsImEiOiJjamhoZml0dTMwMG1wM2RtZW1xMzUyenkyIn0.6VdfSVYnsfQIOvZ3C3uB4Q</string>
 </resources>

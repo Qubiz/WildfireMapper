@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileOptions {
@@ -25,8 +26,34 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    // Support library
+    def supportLibraryVersion = '27.1.1'
+    implementation "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    implementation "com.android.support:cardview-v7:${supportLibraryVersion}"
+    implementation "com.android.support:design:${supportLibraryVersion}"
+    implementation "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+    implementation "com.android.support:support-v4:${supportLibraryVersion}"
+
+    // Guava
+    def guavaVersion = '18.0'
+    implementation "com.google.guava:guava:${guavaVersion}"
+
+    // Room
+    def roomVersion = '1.1.0'
+    implementation "android.arch.persistence.room:runtime:${roomVersion}"
+    annotationProcessor "android.arch.persistence.room:compiler:${roomVersion}"
+
+    // Constraint Layout
+    def constraintLayoutVersion = '1.1.0'
+    implementation "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}"
+
+    // Dagger
+    def daggerVersion = '2.16'
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
 
     // Butterknife
     def butterknifeVersion = '8.8.1'
@@ -41,13 +68,6 @@ dependencies {
     def rxJavaVersion = '2.1.14'
     implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
 
-    // Magellan
-    def magellanVersion = '1.1.0'
-    implementation "com.wealthfront:magellan:${magellanVersion}"
-    implementation "com.wealthfront:magellan-support:${magellanVersion}"
-    implementation "com.wealthfront:magellan-rx:${magellanVersion}"
-    implementation "com.wealthfront:magellan-rx2:${magellanVersion}"
-
     // Mapbox
     def mapboxVersion = '6.1.2'
     implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:${mapboxVersion}"
@@ -55,4 +75,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+repositories {
+    mavenCentral()
 }
