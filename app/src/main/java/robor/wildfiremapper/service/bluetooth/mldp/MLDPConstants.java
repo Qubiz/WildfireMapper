@@ -1,4 +1,4 @@
-package robor.wildfiremapper.service.mldp;
+package robor.wildfiremapper.service.bluetooth.mldp;
 
 import java.util.UUID;
 

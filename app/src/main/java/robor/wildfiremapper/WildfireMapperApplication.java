@@ -18,7 +18,7 @@ public class WildfireMapperApplication extends Application {
     @Inject
     DataManager dataManager;
 
-    private ApplicationComponent applicationComponent;
+    private static ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
@@ -38,7 +38,11 @@ public class WildfireMapperApplication extends Application {
         }
     }
 
-    public ApplicationComponent getComponent() {
+    public static ApplicationComponent getComponent() {
         return applicationComponent;
+    }
+
+    public static DataManager getDataManager() {
+        return applicationComponent.getDataManager();
     }
 }

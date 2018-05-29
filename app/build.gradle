@@ -92,12 +92,15 @@ dependencies {
 
     // Rx Java
     def rxJavaVersion = '2.1.14'
-    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    implementation 'io.reactivex.rxjava2:rxjava:' + rxJavaVersion;
 
     // RxAndroidBle
     def rxAndroidBleVersion = '1.5.0'
     implementation 'com.polidea.rxandroidble2:rxandroidble:' + rxAndroidBleVersion
 
+    // EventBus
+    def eventbusVersion = '3.1.1'
+    implementation 'org.greenrobot:eventbus:' + eventbusVersion;
 
     // Mapbox
     def mapboxVersion = '6.1.2'

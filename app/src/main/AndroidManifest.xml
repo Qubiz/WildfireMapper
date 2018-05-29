@@ -13,7 +13,10 @@
         android:theme="@style/AppTheme"
         android:name="robor.wildfiremapper.WildfireMapperApplication">
 
-        <service android:name=".service.mldp.MLDPConnectionService" />
+        <service android:name=".service.bluetooth.mldp.MLDPConnectionService" />
+        <service android:name=".service.SyncService" />
+        <service android:name=".service.bluetooth.DeviceScanService" />
+        <service android:name=".service.bluetooth.mldp.MLDPDataReceiverService" />
     </application>
 
 </manifest>
