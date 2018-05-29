@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileOptions {
@@ -17,9 +18,16 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        def MAPBOX_API_KEY = "\"pk.eyJ1IjoicXViaXpyb2JvciIsImEiOiJjamhoZml0dTMwMG1wM2RtZW1xMzUyenkyIn0.6VdfSVYnsfQIOvZ3C3uB4Q\""
+
+        debug {
+            buildConfigField 'String', 'MAPBOX_API_KEY', MAPBOX_API_KEY
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'MAPBOX_API_KEY', MAPBOX_API_KEY
         }
     }
 }
@@ -35,14 +43,26 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:${supportLibraryVersion}"
     implementation "com.android.support:support-v4:${supportLibraryVersion}"
 
+    // Font
+    def calligraphyVersion = '2.2.0'
+    implementation 'uk.co.chrisjenx:calligraphy:' + calligraphyVersion
+
+    // GreenDAO
+    def greenDaoVersion = '3.2.2'
+    implementation 'org.greenrobot:greendao:' + greenDaoVersion
+
     // Guava
     def guavaVersion = '18.0'
-    implementation "com.google.guava:guava:${guavaVersion}"
+    implementation 'com.google.guava:guava:' + guavaVersion
 
     // Room
     def roomVersion = '1.1.0'
-    implementation "android.arch.persistence.room:runtime:${roomVersion}"
-    annotationProcessor "android.arch.persistence.room:compiler:${roomVersion}"
+    implementation 'android.arch.persistence.room:runtime:' + roomVersion
+    annotationProcessor 'android.arch.persistence.room:compiler:' + roomVersion
+
+    // Networking
+    def networkingVersion = '1.0.1'
+    implementation 'com.amitshekhar.android:rx2-android-networking:' + networkingVersion
 
     // Constraint Layout
     def constraintLayoutVersion = '1.1.0'
@@ -50,10 +70,16 @@ dependencies {
 
     // Dagger
     def daggerVersion = '2.16'
-    implementation "com.google.dagger:dagger:${daggerVersion}"
-    implementation "com.google.dagger:dagger-android-support:${daggerVersion}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    implementation 'com.google.dagger:dagger:' + daggerVersion
+    annotationProcessor 'com.google.dagger:dagger-compiler:' + daggerVersion
+
+    implementation 'com.google.dagger:dagger-android:' + daggerVersion
+    annotationProcessor 'com.google.dagger:dagger-android-processor:' + daggerVersion
+
+    implementation 'com.google.dagger:dagger-android-support:' + daggerVersion
+
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+    implementation 'javax.inject:javax.inject:1'
 
     // Butterknife
     def butterknifeVersion = '8.8.1'
@@ -67,6 +93,11 @@ dependencies {
     // Rx Java
     def rxJavaVersion = '2.1.14'
     implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+
+    // RxAndroidBle
+    def rxAndroidBleVersion = '1.5.0'
+    implementation 'com.polidea.rxandroidble2:rxandroidble:' + rxAndroidBleVersion
+
 
     // Mapbox
     def mapboxVersion = '6.1.2'

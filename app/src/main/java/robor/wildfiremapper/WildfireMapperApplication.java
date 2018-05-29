@@ -2,20 +2,43 @@ package robor.wildfiremapper;
 
 import android.app.Application;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
-import robor.wildfiremapper.di.DaggerAppComponent;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.interceptors.HttpLoggingInterceptor.Level;
 
-/**
- * We create a custom {@link Application} class that extends  {@link DaggerApplication}.
- * We then override applicationInjector() which tells Dagger how to make our @Singleton Component
- * We never have to call `component.inject(this)` as {@link DaggerApplication} will do that for us.
- */
-public class WildfireMapperApplication extends DaggerApplication {
+import javax.inject.Inject;
+
+import robor.wildfiremapper.data.DataManager;
+import robor.wildfiremapper.di.component.ApplicationComponent;
+import robor.wildfiremapper.di.component.DaggerApplicationComponent;
+import robor.wildfiremapper.di.module.ApplicationModule;
+import robor.wildfiremapper.utils.AppLogger;
+
+public class WildfireMapperApplication extends Application {
+
+    @Inject
+    DataManager dataManager;
+
+    private ApplicationComponent applicationComponent;
 
     @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return DaggerAppComponent.builder().application(this).build();
+    public void onCreate() {
+        super.onCreate();
+
+        applicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
+
+        applicationComponent.inject(this);
+
+        AppLogger.init();
+
+        AndroidNetworking.initialize(getApplicationContext());
+        if (BuildConfig.DEBUG) {
+            AndroidNetworking.enableLogging(Level.BODY);
+        }
     }
 
+    public ApplicationComponent getComponent() {
+        return applicationComponent;
+    }
 }

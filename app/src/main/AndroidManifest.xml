@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="robor.wildfiremapper.WildfireMapperApplication"></application>
+        android:name="robor.wildfiremapper.WildfireMapperApplication">
+
+        <service android:name=".service.mldp.MLDPConnectionService" />
+    </application>
 
 </manifest>
